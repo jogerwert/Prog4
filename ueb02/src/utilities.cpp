@@ -1,9 +1,9 @@
 /**
- * utilities.cpp *
+ * utilities.cpp
  * Hier ist die Logik der verschiedenen Uebungsaufgaben implementiert.
  *
  * @author Johannes Gerwert
- * @version 07.12.2018
+ * @version 08.12.2018
  */
 
 

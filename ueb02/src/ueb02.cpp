@@ -1,20 +1,27 @@
-//============================================================================
-// Name        : ueb02.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+/**
+ * ueb02.cpp
+ * Hier werden die Tests der ueb02 durchgefuehrt.
+ *
+ * @author Johannes Gerwert
+ * @version 08.12.2018
+ */
 
 #include <iostream>
 #include "utilities.h"
 using namespace std;
 
+//Funktions-Prototypen
 bool testWordCount();
 bool testMyStrCmp();
 bool checkMyStrCmp(char* s1, char* s2, int expectedResult);
 bool checkWordCount(char* charPointer, int expectedResult);
 
+/**
+ * Die Tests werden gestartet.
+ * Die Testergebnisse werden zusammengefasst.
+ *
+ * @return 0 bei erfolgreichem Programmdurchlauf
+ */
 int main() {
 	bool test1 { false };
 	bool test2 { false };
@@ -40,16 +47,25 @@ int main() {
 		cout << "Zumindest ein mystrcmp Test wurde nicht bestanden." << endl;
 	}
 
+	return 0;
 }
 
+/**
+ * Die Tests der Teilaufgabe a) werden gestartet.
+ * Es wird fuer verschiedene Test-Saetze die Wort-Anzahl geprueft.
+ *
+ * @return true, wenn Tests bestanden wurden; false sonst
+ */
 bool testWordCount(){
 	bool testPassed { true };
 
+	//Test-Saetze
 	char sEmpty[] {""};
 	char s1W[] {"Test"};
 	char s2W[] {"Hello World"};
 	char sBlank[] {"Hello  \x09World\n!!!"};
 	char s3W[] {"Hello World !!!"};
+
 
 	cout << "#############################################################\n"
 		 << "#                   Beginn WordCount Test                   #\n"
@@ -67,6 +83,14 @@ bool testWordCount(){
 	return testPassed;
 }
 
+/**
+ * Einzelne Tests der Teilaugabe a) werden durchgefuehrt.
+ * Das Ergebnis wird formatiert.
+ *
+ * @param charPointer Der zu pruefende char-String.
+ * @param expectedResult Das erwartete Ergebnis.
+ * @return true, wenn Test bestanden; false sonst
+ */
 bool checkWordCount(char* charPointer, int expectedResult){
 	bool testPassed { true };
 	int result { 0 };
@@ -80,6 +104,12 @@ bool checkWordCount(char* charPointer, int expectedResult){
 	return testPassed;
 }
 
+/**
+ * Die Tests der Teilaufgabe b) werden gestartet.
+ * Es werden verschiedene Test-Char-Strings auf lexikalische Gleichheit geprueft.
+ *
+ * @return true, wenn Tests bestanden wurden, false sonst
+ */
 bool testMyStrCmp(){
 	bool testPassed { true };
 
@@ -133,6 +163,15 @@ bool testMyStrCmp(){
 	return testPassed;
 }
 
+/**
+ * Einzelne Tests der Teilaugabe b) werden durchgefuehrt.
+ * Das Ergebnis wird formatiert.
+ *
+ * @param s1 Der erste zu pruefende String.
+ * @param s2 Der zweite zu pruefende String.
+ * @param expectedResult Das erwartete Ergebnis.
+ * @return true, wenn Test bestanden; false sonst
+ */
 bool checkMyStrCmp(char* s1, char* s2, int expectedResult){
 	bool testPassed { true };
 	int result { 0 };
