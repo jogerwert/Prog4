@@ -13,7 +13,10 @@
 
 int countWords(char* charPointer);
 int mystrcmp(char* charPointer1, char* charPointer2);
-
+template<typename T>
+void insertionSort(T *start, T *end);
+template<typename T>
+void myswap(T *pointer1, T *pointer2);
 
 
 #endif /* UTILITIES_H_ */

@@ -184,3 +184,9 @@ bool checkMyStrCmp(char* s1, char* s2, int expectedResult){
 
 	return testPassed;
 }
+
+bool testInsertionSort(){
+	bool testPassed { true };
+
+	return testPassed;
+}

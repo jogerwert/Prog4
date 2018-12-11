@@ -11,6 +11,9 @@
 #include "utilities.h"
 using namespace std;
 
+template<typename T>
+void myswap(T *pointer1, T *pointer2);
+
 /**
  * Zaehlt die Anzahl der Woerter in einem char-String.
  *
@@ -104,4 +107,25 @@ int mystrcmp(char* charPointer1, char* charPointer2){
 
 
 	return result;
+}
+
+template<typename T>
+void insertionSort(T *start, T *end){
+	T *cur { start };
+	int offset { 0 };
+
+	while(cur != end){
+		while( (cur - offset) != start || *(cur - offset) >= *(cur - offset - 1) ){
+			myswap(*(cur - offset), *(cur - offset -1));
+			offset++;
+		}
+	}
+
+}
+
+template<typename T>
+void myswap(T *pointer1, T *pointer2){
+	T temp { *pointer1 };
+	*pointer1 = *pointer2;
+	*pointer2 = temp;
 }
