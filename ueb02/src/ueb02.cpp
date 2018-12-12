@@ -3,7 +3,8 @@
  * Hier werden die Tests der ueb02 durchgefuehrt.
  *
  * @author Johannes Gerwert
- * @version 08.12.2018
+ * @author Michelle Blau
+ * @version 12.12.2018
  */
 
 #include <iostream>
@@ -13,8 +14,11 @@ using namespace std;
 //Funktions-Prototypen
 bool testWordCount();
 bool testMyStrCmp();
+bool testInsertionSort();
 bool checkMyStrCmp(char* s1, char* s2, int expectedResult);
 bool checkWordCount(char* charPointer, int expectedResult);
+template<typename T>
+bool checkInsertionSort(T *calcPointer1, T *calcPointer2, T *testPointer1, T *testPointer2);
 
 /**
  * Die Tests werden gestartet.
@@ -25,10 +29,13 @@ bool checkWordCount(char* charPointer, int expectedResult);
 int main() {
 	bool test1 { false };
 	bool test2 { false };
+	bool test3 { false };
 
 	test1 = testWordCount();
 
 	test2 = testMyStrCmp();
+
+	test3 = testInsertionSort();
 
 	cout << "#############################################################\n"
 		 << "#                         Test-Ende                         #\n"
@@ -38,13 +45,19 @@ int main() {
 	if(test1){
 		cout << "\nAlle wordCount Tests wurden bestanden." << endl;
 	}else{
-		cout << "Zumindest ein wordCount Test wurde nicht bestanden." << endl;
+		cout << "\nZumindest ein wordCount Test wurde nicht bestanden." << endl;
 	}
 
 	if(test2){
 		cout << "\nAlle mystrcmp Tests wurden bestanden." << endl;
 	}else{
-		cout << "Zumindest ein mystrcmp Test wurde nicht bestanden." << endl;
+		cout << "\nZumindest ein mystrcmp Test wurde nicht bestanden." << endl;
+	}
+
+	if(test3){
+		cout << "\nAlle InsertionSort Tests wurden bestanden." << endl;
+	}else{
+		cout << "\nZumindest ein InsertionSort Test wurde nicht bestanden." << endl;
 	}
 
 	return 0;
@@ -68,7 +81,7 @@ bool testWordCount(){
 
 
 	cout << "#############################################################\n"
-		 << "#                   Beginn WordCount Test                   #\n"
+		 << "#                   Begin WordCount Test                    #\n"
 		 << "#############################################################\n"
 		 << endl;
 
@@ -132,7 +145,7 @@ bool testMyStrCmp(){
 
 
 	cout << "#############################################################\n"
-		 << "#                   Beginn MyStrCmp Test                    #\n"
+		 << "#                   Begin MyStrCmp Test                     #\n"
 		 << "#############################################################\n"
 		 << endl;
 
@@ -185,8 +198,94 @@ bool checkMyStrCmp(char* s1, char* s2, int expectedResult){
 	return testPassed;
 }
 
+/**
+ * Die Tests der Teilaufgabe c) werden gestartet.
+ * Es werden verschiedene Speicherbereiche sortiert und auf Gleichheit geprueft.
+ *
+ * @return true, wenn Tests bestanden wurden, false sonst
+ */
 bool testInsertionSort(){
 	bool testPassed { true };
+
+	int testInt[] {5, 2, 6, 3, 9, 99, 55, 4, 1};
+	int testIntOrdered[] {1, 2, 3, 4, 5, 6, 9, 55, 99};
+
+
+	cout << "#############################################################\n"
+		 << "#                 Begin InsertionSort Test                  #\n"
+		 << "#############################################################\n"
+		 << endl;
+
+	testPassed = testPassed && checkInsertionSort(testInt, testInt + 9, testIntOrdered, testIntOrdered + 9);
+
+
+	return testPassed;
+}
+
+/**
+ * Einzelne Tests der Teilaugabe c) werden durchgefuehrt.
+ * Der zu sortierende Speicherbereich wird ausgegeben,
+ * der sortierte Speicherbereich wird ausgegeben,
+ * der Speicherbereich der Musterloesung wird ausgegeben.
+ * Dann werden der sortierte Speicherbereich und die Musterloesung verglichen.
+ *
+ * Das Ergebnis wird formatiert.
+ *
+ * @param calcPointer1 Der Pointer zum Anfang des zu sortierenden Speicherbereichs.
+ * @param calcPointer2 Der Pointer zum Ende des zu sortierenden Speicherbereichs.
+ * @param testPointer1 Der Pointer zum Anfang des Speicherbereichs der Musterloesung.
+ * @param testPointer2 Der Pointer zum Ende des Speicherbereichs der Musterloesung.
+ * @return true, wenn Test bestanden; false sonst
+ */
+template<typename T>
+bool checkInsertionSort(T *calcPointer1, T *calcPointer2, T *testPointer1, T *testPointer2){
+	bool testPassed { true };
+	T *curPointer {};
+	T *curPointerTest {};
+
+	curPointer = calcPointer1;
+	cout << "Originales Array:" << endl;
+
+	while(curPointer != calcPointer2){
+		cout << *curPointer << " ";
+		curPointer++;
+	}
+
+	cout << endl;
+
+	insertionSort(calcPointer1, calcPointer2);
+
+	curPointer = calcPointer1;
+	cout << "Originales Array nach InsertionSort:" << endl;
+
+	while(curPointer != calcPointer2){
+		cout << *curPointer << " ";
+		curPointer++;
+	}
+
+	cout << endl;
+
+	curPointer = testPointer1;
+	cout << "Musterloesung:" << endl;
+
+	while(curPointer != testPointer2){
+		cout << *curPointer << " ";
+		curPointer++;
+	}
+
+	cout << endl;
+	cout << endl;
+
+	curPointer = calcPointer1;
+	curPointerTest = testPointer1;
+
+	while(curPointer < calcPointer2 && curPointerTest < testPointer2){
+		if(*curPointer != *curPointerTest){
+			testPassed = false;
+		}
+		curPointer++;
+		curPointerTest++;
+	}
 
 	return testPassed;
 }
