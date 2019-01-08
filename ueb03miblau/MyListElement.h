@@ -14,6 +14,7 @@ using namespace std;
 
 class MyListElement {
 	friend class MyDeque;
+	friend class MyIterator;
 
 private:
 	MyListElement* next;
@@ -22,9 +23,12 @@ private:
 
 public:
 	MyListElement(); //Standard-Konstruktor
-	//MyListElement(const MyListElement&); //Kopierkonstruktor
+//	MyListElement(const MyListElement&); //Kopierkonstruktor
 	//~MyListElement(); //Destruktor
 	//MyListElement& operator=(const MyListElement&); //Zuweisungsoperator
+
+	string toString();
 };
+
 
 #endif /* MYLISTELEMENT_H_ */

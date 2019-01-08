@@ -18,6 +18,14 @@ MyListElement::MyListElement(){
 	this->content = {""}; //Leerer String
 }
 
-/**
- *
- */
+//MyListElement::MyListElement(const MyListElement& zuKopieren){
+//	if(zuKopieren.next != nullptr){
+//		this->next = new MyListElement();
+//	}if(zuKopieren.pre != nullptr){
+//		this->pre = new MyListElement();
+//	}
+//}
+
+string MyListElement::toString(){
+	return "Inhalt: " + this->content;
+}

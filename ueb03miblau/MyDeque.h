@@ -10,10 +10,12 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include "MyListElement.h"
 using namespace std;
 
 class MyDeque{
+	friend class MyIterator;
 
 private:
 	int anzElemente;
@@ -24,9 +26,11 @@ private:
 
 public:
 	MyDeque(); //Standard-Konstruktor
+	MyDeque(const vector<string>&);
 	MyDeque(const MyDeque&); //Kopierkonstruktor
 	~MyDeque(); //Destruktor
-	MyDeque& operator=(const MyDeque&); //Zuweisungsoperator
+	MyDeque& operator=(MyDeque); //Zuweisungsoperator
+	bool operator== (const MyDeque&);
 
 	void push_back(const string&); //spaeter Typ aendern
 	void push_front(const string&);

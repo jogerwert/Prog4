@@ -6,7 +6,11 @@
  */
 
 #include "MyDeque.h"
+#include "MyIterator.h"
+#include <iostream>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -14,6 +18,56 @@ MyDeque::MyDeque(){
 	this->anzElemente = 0;
 	this->head = nullptr;
 	this->tail = nullptr;
+}
+
+MyDeque::MyDeque(const vector<string>& stringVector){
+	this->anzElemente = 0;
+	this->head = nullptr;
+	this->tail = nullptr;
+
+	for(string s : stringVector){
+		push_back(s);
+	}
+}
+
+MyDeque::MyDeque(const MyDeque& zuKopieren){
+	MyIterator iterator(zuKopieren);
+	while(iterator.hasNext()){
+		//mach kopien
+	}
+}
+
+
+MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
+	swap(this->anzElemente, zuZuweisen.anzElemente);
+	swap(this->head, zuZuweisen.head);
+	swap(this->tail, zuZuweisen.tail);
+
+	return *this;
+}
+
+bool MyDeque::operator==(const MyDeque& a) {
+	cout << "== Operator wird benutzt" << endl;
+	if(this->anzElemente != a.anzElemente){
+		cout << "Anzahl Elemente beider Deques ungleich!!!" << endl;
+		return false;
+	}
+	bool ergebnis = true;
+	MyIterator iteratorVergleich(a);
+	MyIterator iteratorOriginal(*this);
+
+	MyListElement vergleich = iteratorVergleich.next();
+	MyListElement original = iteratorOriginal.next();
+
+	while(iteratorVergleich.hasNext()){
+		if(vergleich.content != original.content){
+			ergebnis = false;
+			cout << "Elemente beider Deques ungleich!!!" << endl;
+		}
+		vergleich = iteratorVergleich.next();
+		original = iteratorOriginal.next();
+	}
+	return ergebnis;
 }
 
 void MyDeque::push_back(const string& neuerInhalt){
