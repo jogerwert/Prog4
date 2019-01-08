@@ -101,6 +101,15 @@ MyDeque MyDeque::operator+(const MyDeque& md){
 	return ergebnis;
 }
 
+MyDeque& MyDeque::operator+=(const MyDeque& md){
+	MyIterator iterator(md);
+
+	while(iterator.hasNext()){
+		this->push_back(iterator.next().content);
+	}
+
+	return *this;
+}
 
 void MyDeque::push_back(const string& neuerInhalt){
 	MyListElement* neuesElement = new MyListElement();
