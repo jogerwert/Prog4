@@ -59,5 +59,6 @@ int main(int argc, char** argv){
 	//cout << "Destruktor hat geklappt? " << testDeque2->toString() << endl;
 
 	*testDeque = (*testDeque) + (*testDeque2) + (*testDeque2) ;
+	*testDeque += (*testDeque2);
 	cout << testDeque->toString() << " <- Ergebnis operator+" << endl;
 }

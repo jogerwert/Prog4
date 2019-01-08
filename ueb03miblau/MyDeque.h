@@ -33,6 +33,7 @@ public:
 	bool operator== (const MyDeque&);
 	bool operator!= (const MyDeque&);
 	MyDeque operator+(const MyDeque&);
+	MyDeque& operator+=(const MyDeque&);
 
 	void push_back(const string&); //spaeter Typ aendern
 	void push_front(const string&);
