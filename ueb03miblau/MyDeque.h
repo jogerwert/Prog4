@@ -31,12 +31,14 @@ public:
 	~MyDeque(); //Destruktor
 	MyDeque& operator=(MyDeque); //Zuweisungsoperator
 	bool operator== (const MyDeque&);
+	bool operator!= (const MyDeque&);
+	MyDeque operator+(const MyDeque&);
 
 	void push_back(const string&); //spaeter Typ aendern
 	void push_front(const string&);
 
-	MyListElement* pop_back();
-	MyListElement* pop_front();
+	void pop_back();
+	void pop_front();
 
 	inline bool isEmpty();
 	inline bool hatGenauEinElement();

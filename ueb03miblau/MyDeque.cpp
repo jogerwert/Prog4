@@ -32,24 +32,36 @@ MyDeque::MyDeque(const vector<string>& stringVector){
 
 MyDeque::MyDeque(const MyDeque& zuKopieren){
 	MyIterator iterator(zuKopieren);
+	MyDeque* kopie = new MyDeque();
+
 	while(iterator.hasNext()){
-		//mach kopien
+		kopie->push_back(iterator.next().content);
 	}
+	this->head = kopie->head;
+	this->tail = kopie->tail;
+	this->anzElemente = kopie->anzElemente;
+	cout << "MyDeque::Kopierkonstruktor" << endl;
 }
 
+
+MyDeque::~MyDeque(){
+	while(!isEmpty()){
+		this->pop_back();
+	}
+	cout << "MyDeque::Destruktor" << endl; //TODO löschen
+}
 
 MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
 	swap(this->anzElemente, zuZuweisen.anzElemente);
 	swap(this->head, zuZuweisen.head);
 	swap(this->tail, zuZuweisen.tail);
-
+	cout << "MyDeque::Zuweisungsoperator" << endl;
 	return *this;
 }
 
 bool MyDeque::operator==(const MyDeque& a) {
-	cout << "== Operator wird benutzt" << endl;
 	if(this->anzElemente != a.anzElemente){
-		cout << "Anzahl Elemente beider Deques ungleich!!!" << endl;
+		//cout << "Anzahl Elemente beider Deques ungleich!!!" << endl;
 		return false;
 	}
 	bool ergebnis = true;
@@ -62,13 +74,33 @@ bool MyDeque::operator==(const MyDeque& a) {
 	while(iteratorVergleich.hasNext()){
 		if(vergleich.content != original.content){
 			ergebnis = false;
-			cout << "Elemente beider Deques ungleich!!!" << endl;
+			//cout << "Elemente beider Deques ungleich!!!" << endl;
 		}
 		vergleich = iteratorVergleich.next();
 		original = iteratorOriginal.next();
 	}
 	return ergebnis;
 }
+
+
+
+bool MyDeque::operator!=(const MyDeque& md){
+	return !(*this == md);
+}
+
+
+
+MyDeque MyDeque::operator+(const MyDeque& md){
+	MyDeque ergebnis(*this);
+	MyIterator iterator(md);
+
+	while(iterator.hasNext()){
+		ergebnis.push_back(iterator.next().content);
+	}
+	cout << "MyDeque::operator+" << endl;
+	return ergebnis;
+}
+
 
 void MyDeque::push_back(const string& neuerInhalt){
 	MyListElement* neuesElement = new MyListElement();
@@ -108,40 +140,52 @@ void MyDeque::push_front(const string& neuerInhalt){
 	anzElemente++;
 }
 
-MyListElement* MyDeque::pop_back(){
+void MyDeque::pop_back(){
 	MyListElement* entfernt = tail;
 	if(isEmpty()){
 		cout << "Deque ist Leer!! Exception hier!!" << endl;
 	}else if(hatGenauEinElement()){
+		delete tail;
 		tail = nullptr;
+		delete head;
 		head = nullptr;
+		anzElemente--;
 	}else if(hatZweiElemente()){
 		tail = head;
+		anzElemente--;
 	}else{
 		tail = tail->pre;
 		tail->next = nullptr;
+		anzElemente--;
 	}
-	anzElemente--;
 
-	return entfernt;
+	if(entfernt != nullptr){
+		delete entfernt;
+	}
 }
 
-MyListElement* MyDeque::pop_front(){
+void MyDeque::pop_front(){
 	MyListElement* entfernt = head;
 	if(isEmpty()){
 		cout << "Deque ist Leer!! Exception hier!!" << endl;
 	}else if(hatGenauEinElement()){
+		delete tail;
 		tail = nullptr;
+		delete head;
 		head = nullptr;
+		anzElemente--;
 	}else if(hatZweiElemente()){
 		head = tail;
+		anzElemente--;
 	}else{
 		head = head->next;
 		head->pre = nullptr;
+		anzElemente--;
 	}
-	anzElemente--;
 
-	return entfernt;
+	if(entfernt != nullptr){
+		delete entfernt;
+	}
 }
 
 inline bool MyDeque::isEmpty(){

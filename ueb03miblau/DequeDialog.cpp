@@ -12,6 +12,10 @@
 
 using namespace std;
 
+void tue_nichts(MyDeque* test){
+
+}
+
 int main(int argc, char** argv){
 
 	vector<string> stringVector;
@@ -33,17 +37,27 @@ int main(int argc, char** argv){
 //	stringVector.push_back("eigentlich ");
 //	stringVector.push_back("eigentlich ");
 
-	MyDeque* testDeque2 = new MyDeque(stringVector);
+	MyDeque* testDeque2 = new MyDeque(*testDeque);
 
-	testDeque2->pop_front();
-	testDeque2->pop_front();
-	testDeque2->pop_front();
+	testDeque2->pop_back();
+	testDeque2->pop_back();
+
+	testDeque2->push_back("Gandalf");
+
 
 
 	cout << testDeque->toString() << " <- Das ist der Inhalt nach entfernen" << endl;
 	cout << testDeque2->toString() << " <- Das ist der Inhalt nach entfernen" << endl;
 
-	bool vergleich {*testDeque == *testDeque2};
-	cout << boolalpha << "Vergleich == ->" << vergleich << endl;
+	bool vergleich1 {*testDeque == *testDeque2};
+	bool vergleich2 {*testDeque != *testDeque2};
+	cout << boolalpha << "Vergleich == ->" << vergleich1 << endl;
+	cout << boolalpha << "Vergleich != ->" << vergleich2 << endl;
 
+
+	//tue_nichts(testDeque2);
+	//cout << "Destruktor hat geklappt? " << testDeque2->toString() << endl;
+
+	*testDeque = (*testDeque) + (*testDeque2) + (*testDeque2) ;
+	cout << testDeque->toString() << " <- Ergebnis operator+" << endl;
 }
