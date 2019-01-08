@@ -27,6 +27,7 @@ public:
 	//~MyListElement(); //Destruktor
 	//MyListElement& operator=(const MyListElement&); //Zuweisungsoperator
 
+	string getContent();
 	string toString();
 };
 
