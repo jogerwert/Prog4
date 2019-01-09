@@ -1,3 +1,9 @@
+/**
+ * MyIterator.c: Iterator-Klasse, die ueber MyDeque-Objekte laufen kann
+ * @author Michelle Blau
+ * @author Johannes Gerwert
+ */
+
 #ifndef MYITERATOR_H_
 #define MYITERATOR_H_
 

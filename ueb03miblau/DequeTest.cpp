@@ -12,7 +12,7 @@
 using namespace std;
 
 /**Konstanten**/
-constexpr auto PROGRAMM_ENDE   = 0;
+constexpr auto PROGRAMM_ENDE   = 10;
 constexpr auto PUSH_BACK	   = 1;
 constexpr auto PUSH_FRONT 	   = 2;
 constexpr auto POP_BACK 	   = 3;
@@ -29,6 +29,9 @@ void ausfuehren(int, MyDeque&, MyDeque&);
 void push_back_ausfuehren(MyDeque&);
 void push_front_ausfuehren(MyDeque&);
 void anlegen_mittels_array(MyDeque&, MyDeque&);
+void teste_kopierkonst_zuweisung(MyDeque&, MyDeque&);
+void vergleiche(MyDeque&, MyDeque&);
+void anhaengen(MyDeque&, MyDeque&);
 
 /**
  * Haupt-Schleife
@@ -55,16 +58,16 @@ int auswaehlen(){
 	int auswahl { 0 };
 
 	cout << "---Funktions-Auswahl:---" << endl;
-	cout << "push_back: " << PUSH_BACK << endl;
-	cout << "push_front: " << PUSH_FRONT << endl;
-	cout << "pop_back: " << POP_BACK << endl;
-	cout << "pop_front: " << POP_FRONT << endl;
-	cout << "Konstruktion mit Array von char-Strings: " << KONSTRUKTION_MIT_ARRAY << endl;
-	cout << "Kopierkonstruktor, Zuweisungsoperator: " << KOPIERKONST_ZUWEISUNGS_OP << endl;
-	cout << "Operator== und Operator!=: " << VERGLEICHE << endl;
-	cout << "Operator+ und Operator+=: " << ANHAENGEN << endl;
-	cout << "Operator[]: " << ELEMENTZUGRIFF << endl;
-	cout << "Programm beenden: " << PROGRAMM_ENDE << endl;
+	cout <<  PUSH_BACK << " push_back" << endl;
+	cout <<  PUSH_FRONT << " push_front" << endl;
+	cout <<  POP_BACK <<" pop_back" <<  endl;
+	cout <<  POP_FRONT <<" pop_front" << endl;
+	cout <<  KONSTRUKTION_MIT_ARRAY <<" Konstruktion mit Array von char-Strings, Zuweisungsoperator" << endl;
+	cout <<  KOPIERKONST_ZUWEISUNGS_OP <<" Kopierkonstruktor, Zuweisungsoperator" << endl;
+	cout <<  VERGLEICHE <<" Operator== und Operator!=" << endl;
+	cout <<  ANHAENGEN << " Operator+ und Operator+=" <<endl;
+	cout <<  ELEMENTZUGRIFF << " Operator[] " << endl;
+	cout <<  PROGRAMM_ENDE <<" Programm beenden" << endl;
 
 	cin >> auswahl;
 	return auswahl;
@@ -96,15 +99,15 @@ void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
 		break;
 
 	case KOPIERKONST_ZUWEISUNGS_OP:
-//		teste_kopierkonst_zuweisung(testDeque1, testDeque2);
+		teste_kopierkonst_zuweisung(testDeque1, testDeque2);
 		break;
 
 	case VERGLEICHE:
-//		vergleiche(testDeque1, testDeque2);
+		vergleiche(testDeque1, testDeque2);
 		break;
 
 	case ANHAENGEN:
-		//anhaengen(testDeque1, testDeque2);
+		anhaengen(testDeque1, testDeque2);
 		break;
 
 	case ELEMENTZUGRIFF:
@@ -123,6 +126,9 @@ void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
 }
 
 
+/**
+ * Fügt Nutzereingabe an Ende der Deque ein
+ */
 void push_back_ausfuehren(MyDeque& testDeque1){
 	string eingabe{};
 	cout << "Wert eingeben: " << endl;
@@ -131,6 +137,9 @@ void push_back_ausfuehren(MyDeque& testDeque1){
 	testDeque1.push_back(eingabe);
 }
 
+/**
+ * Fügt Nutzereingabe an Anfang der Deque ein
+ */
 void push_front_ausfuehren(MyDeque& testDeque1){
 	string eingabe{};
 	cout << "Wert eingeben: " << endl;
@@ -139,6 +148,9 @@ void push_front_ausfuehren(MyDeque& testDeque1){
 	testDeque1.push_front(eingabe);
 }
 
+/**
+ * Allokiert dynamisch temporäre Deque, ruft Zuweisungsoperator auf
+ */
 void anlegen_mittels_array(MyDeque& testDeque1, MyDeque& testDeque2){
 	vector<string> vector;
 
@@ -147,11 +159,39 @@ void anlegen_mittels_array(MyDeque& testDeque1, MyDeque& testDeque2){
 		vector.push_back(iterator.next().getContent());
 	}
 
-	MyDeque tmpDeque(vector);
-	testDeque2 = tmpDeque;
+	MyDeque* tmpDeque = new MyDeque(vector);
+	testDeque2 = *tmpDeque;
 }
 
 
+/**
+ * Fuehrt Kopierkonstruktor und dann Zuweisungsoperator aus
+ */
+void teste_kopierkonst_zuweisung(MyDeque& testDeque1,MyDeque& testDeque2){
+	MyDeque* tmpDeque = new MyDeque(testDeque1);
+	cout << "tmpDeque: " << tmpDeque->toString() << endl;
+	testDeque2 = *tmpDeque;
+}
+
+/**
+ * Fuehrt Vergleich "==" und "!=" aus
+ */
+void vergleiche(MyDeque& testDeque1, MyDeque& testDeque2){
+	cout << boolalpha << "Vergleich == : " << (testDeque1==testDeque2) << endl;
+	cout << boolalpha << "Vergleich != : " << (testDeque1!=testDeque2) << endl;
+}
+
+/**
+ * Demonstiert "+" und "+="
+ */
+void anhaengen(MyDeque& testDeque1, MyDeque& testDeque2){
+	MyDeque tmpDeque = testDeque1 + testDeque2;
+	cout << "testDeque1 + testDeque2: " << (tmpDeque).toString() << endl;
+
+	testDeque2 += testDeque1;
+	cout << "testDeque2 += testDeque1 " << (testDeque2).toString() << endl;
+
+}
 
 
 

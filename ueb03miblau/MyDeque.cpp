@@ -48,7 +48,7 @@ MyDeque::~MyDeque(){
 	while(!isEmpty()){
 		this->pop_back();
 	}
-	cout << "MyDeque::Destruktor" << endl; //TODO löschen
+	cout << "MyDeque::Destruktor" << endl;
 }
 
 MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
