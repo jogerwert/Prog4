@@ -10,11 +10,16 @@
 
 
 #include <string>
+#include "MyDeque.h"
+#include "MyIterator.h"
 using namespace std;
 
 template <typename T>
 class MyListElement {
+	template <typename>
 	friend class MyDeque;
+
+	template <typename>
 	friend class MyIterator;
 
 private:
@@ -29,5 +34,24 @@ public:
 	T toString();
 };
 
+/**
+ * Standard-Konstruktor
+ */
+template<class T>
+MyListElement<T>::MyListElement(){
+	this->next = {nullptr};
+	this->pre = {nullptr};
+	this->content = {""};
+}
+
+template<class T>
+T MyListElement<T>::toString(){
+	return "Inhalt: " + this->content;
+}
+
+template<class T>
+T MyListElement<T>::getContent(){
+	return this->content;
+}
 
 #endif /* MYLISTELEMENT_H_ */

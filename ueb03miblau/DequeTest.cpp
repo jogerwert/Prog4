@@ -58,14 +58,14 @@ int main(int argc, char** argv){
 	MyDeque<string>* testDeque1 = new MyDeque<string>();
 	MyDeque<string>* testDeque2 = new MyDeque<string>();
 
-//	int funktionsAuswahl { -1 };
-//	while(funktionsAuswahl != PROGRAMM_ENDE ){
-//
-//		funktionsAuswahl = auswaehlen();
-//		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
-//
-//	return 0;
-//	}
+	int funktionsAuswahl { -1 };
+	while(funktionsAuswahl != PROGRAMM_ENDE ){
+
+		funktionsAuswahl = auswaehlen();
+		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
+
+	return 0;
+	}
 }
 
 /**

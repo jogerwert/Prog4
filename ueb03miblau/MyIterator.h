@@ -9,9 +9,17 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include "MyListElement.h"
 #include "MyDeque.h"
 using namespace std;
+
+
+template<typename T>
+class MyDeque;
+
+template<typename T>
+class MyListElement;
 
 template <typename T>
 class MyIterator {
@@ -28,5 +36,24 @@ public:
 	bool hasNext();
 };
 
+template<class T>
+MyIterator<T>::MyIterator(const MyDeque<T>& deque){
+	this->maxAnzElemente = deque.anzElemente;
+	this->position = 0;
+	this->current = deque.head;
+}
+
+template<class T>
+MyListElement<T> MyIterator<T>::next(){
+	MyListElement<T>* aktuell = this->current;
+	current = current->next;
+	position++;
+	return *aktuell;
+}
+
+template<class T>
+bool MyIterator<T>::hasNext(){
+	return position < maxAnzElemente;
+}
 
 #endif /* MYITERATOR_H_ */
