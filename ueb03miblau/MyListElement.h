@@ -23,10 +23,8 @@ private:
 
 public:
 	MyListElement(); //Standard-Konstruktor
-//	MyListElement(const MyListElement&); //Kopierkonstruktor
-	//~MyListElement(); //Destruktor
-	//MyListElement& operator=(const MyListElement&); //Zuweisungsoperator
 
+	string getContent();
 	string toString();
 	string* contentPointer();
 };

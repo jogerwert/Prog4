@@ -1,7 +1,8 @@
-
-
-
-
+/**
+ * MyIterator.cpp: Iterator-Klasse, die ueber MyDeque-Objekte laufen kann
+ * @author Michelle Blau
+ * @author Johannes Gerwert
+ */
 
 #include <string>
 #include <iostream>

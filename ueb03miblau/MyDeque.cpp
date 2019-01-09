@@ -48,7 +48,7 @@ MyDeque::~MyDeque(){
 	while(!isEmpty()){
 		this->pop_back();
 	}
-	cout << "MyDeque::Destruktor" << endl; //TODO löschen
+	cout << "MyDeque::Destruktor" << endl;
 }
 
 MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
@@ -254,6 +254,7 @@ string MyDeque::toString(){
 	MyListElement* cur = head; //Impliziter Aufruf des Kopierkonstr.
 	for(int i = 0; i < anzElemente; i++){
 		ergebnis.append(cur->content);
+		ergebnis.append(" ");
 		cur = cur->next;
 	}
 	return ergebnis;

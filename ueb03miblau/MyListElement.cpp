@@ -15,21 +15,18 @@ using namespace std;
 MyListElement::MyListElement(){
 	this->next = {nullptr};
 	this->pre = {nullptr};
-	this->content = {""}; //Leerer String
+	this->content = {""};
 }
-
-//MyListElement::MyListElement(const MyListElement& zuKopieren){
-//	if(zuKopieren.next != nullptr){
-//		this->next = new MyListElement();
-//	}if(zuKopieren.pre != nullptr){
-//		this->pre = new MyListElement();
-//	}
-//}
 
 string MyListElement::toString(){
 	return "Inhalt: " + this->content;
 }
 
+
 string* MyListElement::contentPointer(){
 	return &content;
+}
+	
+string MyListElement::getContent(){
+	return this->content;
 }
