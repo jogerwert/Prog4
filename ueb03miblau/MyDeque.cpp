@@ -111,6 +111,46 @@ MyDeque& MyDeque::operator+=(const MyDeque& md){
 	return *this;
 }
 
+string MyDeque::operator[](int i) const{
+
+	assert(i >= 0 && i < anzElemente);
+
+	MyIterator iterator( *(this) );
+	int j {0};
+	string ergebnis;
+
+	while(j < i){
+		cout << "test1" << endl;
+		iterator.next();
+		cout << "test2" << endl;
+		j++;
+	}
+	ergebnis = iterator.next().content;
+
+	return ergebnis;
+}
+
+//string& MyDeque::operator[](int i){
+//
+//	assert(i >= 0 && i < anzElemente);
+//
+//		MyIterator iterator( *(this) );
+//		int j {0};
+//		string* ergebnis;
+//
+//		while(j < i){
+//			cout << "test3" << endl;
+//			iterator.next();
+//			cout << "test4" << endl;
+//			j++;
+//		}
+//		cout << "test5" << endl;
+//		ergebnis = iterator.next().contentPointer;
+//		cout << "test6" << endl;
+//
+//		return *ergebnis;
+//}
+
 void MyDeque::push_back(const string& neuerInhalt){
 	MyListElement* neuesElement = new MyListElement();
 	neuesElement->content = neuerInhalt;

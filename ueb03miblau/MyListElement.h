@@ -28,6 +28,7 @@ public:
 	//MyListElement& operator=(const MyListElement&); //Zuweisungsoperator
 
 	string toString();
+	string* contentPointer();
 };
 
 

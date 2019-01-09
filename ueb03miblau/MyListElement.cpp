@@ -29,3 +29,7 @@ MyListElement::MyListElement(){
 string MyListElement::toString(){
 	return "Inhalt: " + this->content;
 }
+
+string* MyListElement::contentPointer(){
+	return &content;
+}

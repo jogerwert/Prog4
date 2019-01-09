@@ -61,4 +61,8 @@ int main(int argc, char** argv){
 	*testDeque = (*testDeque) + (*testDeque2) + (*testDeque2) ;
 	*testDeque += (*testDeque2);
 	cout << testDeque->toString() << " <- Ergebnis operator+" << endl;
+
+	cout << (*testDeque)[1] << "<- Inhalt" << endl;
+	(*testDeque)[1] = "testString";
+	cout << testDeque->toString() << " <- Ergebnis nach veraenderung" << endl;
 }

@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <cassert>
 #include "MyListElement.h"
 using namespace std;
 
@@ -34,6 +35,8 @@ public:
 	bool operator!= (const MyDeque&);
 	MyDeque operator+(const MyDeque&);
 	MyDeque& operator+=(const MyDeque&);
+	string operator[](int i) const;
+	//string& operator[](int i);
 
 	void push_back(const string&); //spaeter Typ aendern
 	void push_front(const string&);
