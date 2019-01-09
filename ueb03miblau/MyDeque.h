@@ -78,7 +78,7 @@ MyDeque<T>::MyDeque(const vector<T>& vec){
 template<class T>
 MyDeque<T>::MyDeque(const MyDeque<T>& zuKopieren){
 	MyIterator<T> iterator(zuKopieren);
-	MyDeque<T>* kopie = new MyDeque<T>();
+	MyDeque<T>* kopie = new MyDeque<T>(); //TODO: das hier führt zu speicherleiche, braucht man nicht!!!
 
 	while(iterator.hasNext()){
 		kopie->push_back(iterator.next().content);
@@ -172,7 +172,7 @@ T MyDeque<T>::operator[](int i) const{
 			iterator.next();
 			j++;
 		}
-		ergebnis = iterator.next().content;
+		ergebnis = iterator.next().content; //TODO: Ergebnis unnötig
 
 		return ergebnis;
 }
