@@ -14,25 +14,28 @@
 
 using namespace std;
 
-MyDeque::MyDeque(){
+template<class T>
+MyDeque<T>::MyDeque(){
 	this->anzElemente = 0;
 	this->head = nullptr;
 	this->tail = nullptr;
 }
 
-MyDeque::MyDeque(const vector<string>& stringVector){
+template<class T>
+MyDeque<T>::MyDeque(const vector<T>& vec){
 	this->anzElemente = 0;
 	this->head = nullptr;
 	this->tail = nullptr;
 
-	for(string s : stringVector){
-		push_back(s);
+	for(T t : vec){
+		push_back(t);
 	}
 }
 
-MyDeque::MyDeque(const MyDeque& zuKopieren){
-	MyIterator iterator(zuKopieren);
-	MyDeque* kopie = new MyDeque();
+template<class T>
+MyDeque<T>::MyDeque(const MyDeque<T>& zuKopieren){
+	MyIterator<T> iterator(zuKopieren);
+	MyDeque<T>* kopie = new MyDeque<T>();
 
 	while(iterator.hasNext()){
 		kopie->push_back(iterator.next().content);
@@ -43,15 +46,16 @@ MyDeque::MyDeque(const MyDeque& zuKopieren){
 	cout << "MyDeque::Kopierkonstruktor" << endl;
 }
 
-
-MyDeque::~MyDeque(){
+template<class T>
+MyDeque<T>::~MyDeque(){
 	while(!isEmpty()){
 		this->pop_back();
 	}
 	cout << "MyDeque::Destruktor" << endl;
 }
 
-MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
+template<class T>
+MyDeque<T>& MyDeque<T>::operator=(MyDeque zuZuweisen){
 	swap(this->anzElemente, zuZuweisen.anzElemente);
 	swap(this->head, zuZuweisen.head);
 	swap(this->tail, zuZuweisen.tail);
@@ -59,22 +63,21 @@ MyDeque& MyDeque::operator=(MyDeque zuZuweisen){
 	return *this;
 }
 
-bool MyDeque::operator==(const MyDeque& a) {
+template<class T>
+bool MyDeque<T>::operator==(const MyDeque<T>& a) {
 	if(this->anzElemente != a.anzElemente){
-		//cout << "Anzahl Elemente beider Deques ungleich!!!" << endl;
 		return false;
 	}
 	bool ergebnis = true;
-	MyIterator iteratorVergleich(a);
-	MyIterator iteratorOriginal(*this);
+	MyIterator<T> iteratorVergleich(a);
+	MyIterator<T> iteratorOriginal(*this);
 
-	MyListElement vergleich = iteratorVergleich.next();
-	MyListElement original = iteratorOriginal.next();
+	MyListElement<T> vergleich = iteratorVergleich.next();
+	MyListElement<T> original = iteratorOriginal.next();
 
 	while(iteratorVergleich.hasNext()){
 		if(vergleich.content != original.content){
 			ergebnis = false;
-			//cout << "Elemente beider Deques ungleich!!!" << endl;
 		}
 		vergleich = iteratorVergleich.next();
 		original = iteratorOriginal.next();
@@ -83,16 +86,16 @@ bool MyDeque::operator==(const MyDeque& a) {
 }
 
 
-
-bool MyDeque::operator!=(const MyDeque& md){
+template<class T>
+bool MyDeque<T>::operator!=(const MyDeque<T>& md){
 	return !(*this == md);
 }
 
 
-
-MyDeque MyDeque::operator+(const MyDeque& md){
-	MyDeque ergebnis(*this);
-	MyIterator iterator(md);
+template<class T>
+MyDeque<T> MyDeque<T>::operator+(const MyDeque<T>& md){
+	MyDeque<T> ergebnis(*this);
+	MyIterator<T> iterator(md);
 
 	while(iterator.hasNext()){
 		ergebnis.push_back(iterator.next().content);
@@ -101,8 +104,9 @@ MyDeque MyDeque::operator+(const MyDeque& md){
 	return ergebnis;
 }
 
-MyDeque& MyDeque::operator+=(const MyDeque& md){
-	MyIterator iterator(md);
+template<class T>
+MyDeque<T>& MyDeque<T>::operator+=(const MyDeque<T>& md){
+	MyIterator<T> iterator(md);
 
 	while(iterator.hasNext()){
 		this->push_back(iterator.next().content);
@@ -111,8 +115,9 @@ MyDeque& MyDeque::operator+=(const MyDeque& md){
 	return *this;
 }
 
-void MyDeque::push_back(const string& neuerInhalt){
-	MyListElement* neuesElement = new MyListElement();
+template<class T>
+void MyDeque<T>::push_back(const T& neuerInhalt){
+	MyListElement<T>* neuesElement = new MyListElement<T>();
 	neuesElement->content = neuerInhalt;
 
 	if(isEmpty()){
@@ -130,8 +135,9 @@ void MyDeque::push_back(const string& neuerInhalt){
 	anzElemente++;
 }
 
-void MyDeque::push_front(const string& neuerInhalt){
-	MyListElement* neuesElement = new MyListElement();
+template<class T>
+void MyDeque<T>::push_front(const T& neuerInhalt){
+	MyListElement<T>* neuesElement = new MyListElement<T>();
 	neuesElement->content = neuerInhalt;
 
 	if(isEmpty()){
@@ -149,10 +155,11 @@ void MyDeque::push_front(const string& neuerInhalt){
 	anzElemente++;
 }
 
-void MyDeque::pop_back(){
-	MyListElement* entfernt = tail;
+template<class T>
+void MyDeque<T>::pop_back(){
+	MyListElement<T>* entfernt = tail;
 	if(isEmpty()){
-		cout << "Deque ist Leer!! Exception hier!!" << endl;
+		cout << "Deque ist Leer!!" << endl;
 	}else if(hatGenauEinElement()){
 		delete tail;
 		tail = nullptr;
@@ -173,10 +180,11 @@ void MyDeque::pop_back(){
 	}
 }
 
-void MyDeque::pop_front(){
-	MyListElement* entfernt = head;
+template<class T>
+void MyDeque<T>::pop_front(){
+	MyListElement<T>* entfernt = head;
 	if(isEmpty()){
-		cout << "Deque ist Leer!! Exception hier!!" << endl;
+		cout << "Deque ist Leer!!" << endl;
 	}else if(hatGenauEinElement()){
 		delete tail;
 		tail = nullptr;
@@ -197,21 +205,25 @@ void MyDeque::pop_front(){
 	}
 }
 
-inline bool MyDeque::isEmpty(){
+template<class T>
+inline bool MyDeque<T>::isEmpty(){
 	return (anzElemente <= 0);
 }
 
-inline bool MyDeque::hatGenauEinElement(){
+template<class T>
+inline bool MyDeque<T>::hatGenauEinElement(){
 	return (anzElemente == 1);
 }
 
-inline bool MyDeque::hatZweiElemente(){
+template<class T>
+inline bool MyDeque<T>::hatZweiElemente(){
 	return (anzElemente == 2);
 }
 
-string MyDeque::toString(){
+template<class T>
+string MyDeque<T>::toString(){
 	string ergebnis = "";
-	MyListElement* cur = head; //Impliziter Aufruf des Kopierkonstr.
+	MyListElement<T>* cur = head; //Impliziter Aufruf des Kopierkonstr.
 	for(int i = 0; i < anzElemente; i++){
 		ergebnis.append(cur->content);
 		ergebnis.append(" ");
@@ -220,7 +232,8 @@ string MyDeque::toString(){
 	return ergebnis;
 }
 
-void MyDeque::adressenAusgeben(){
-	cout << anzElemente << "<-aktuelle Anzahl Elemente" << endl;
-	cout << head << "<- Adresse head | " << tail << "<- Adresse tail" << endl;
+template<class T>
+void MyDeque<T>::adressenAusgeben(){
+//	cout << anzElemente << "<-aktuelle Anzahl Elemente" << endl;
+//	cout << head << "<- Adresse head | " << tail << "<- Adresse tail" << endl;
 }

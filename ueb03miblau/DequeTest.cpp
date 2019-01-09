@@ -23,31 +23,49 @@ constexpr auto VERGLEICHE 	  = 7;
 constexpr auto ANHAENGEN 	  = 8;
 constexpr auto ELEMENTZUGRIFF = 9;
 
+constexpr auto TESTE_INT = 1;
+constexpr auto TESTE_STRING = 2;
+
 /**Funktions-Prototypen**/
 int auswaehlen();
-void ausfuehren(int, MyDeque&, MyDeque&);
-void push_back_ausfuehren(MyDeque&);
-void push_front_ausfuehren(MyDeque&);
-void anlegen_mittels_array(MyDeque&, MyDeque&);
-void teste_kopierkonst_zuweisung(MyDeque&, MyDeque&);
-void vergleiche(MyDeque&, MyDeque&);
-void anhaengen(MyDeque&, MyDeque&);
+
+template<class T>
+void ausfuehren(int, MyDeque<T>&, MyDeque<T>&);
+
+template<class T>
+void push_back_ausfuehren(MyDeque<T>&);
+
+template<class T>
+void push_front_ausfuehren(MyDeque<T>&);
+
+template<class T>
+void anlegen_mittels_array(MyDeque<T>&, MyDeque<T>&);
+
+template<class T>
+void teste_kopierkonst_zuweisung(MyDeque<T>&, MyDeque<T>&);
+
+template<class T>
+void vergleiche(MyDeque<T>&, MyDeque<T>&);
+
+template<class T>
+void anhaengen(MyDeque<T>&, MyDeque<T>&);
 
 /**
  * Haupt-Schleife
  */
 int main(int argc, char** argv){
 
-	MyDeque* testDeque1 = new MyDeque();
-	MyDeque* testDeque2 = new MyDeque();
+	MyDeque<string>* testDeque1 = new MyDeque<string>();
+	MyDeque<string>* testDeque2 = new MyDeque<string>();
 
-	int funktionsAuswahl { -1 };
-	while(funktionsAuswahl != PROGRAMM_ENDE ){
-
-		funktionsAuswahl = auswaehlen();
-		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
-	}
-	return 0;
+//	int funktionsAuswahl { -1 };
+//	while(funktionsAuswahl != PROGRAMM_ENDE ){
+//
+//		funktionsAuswahl = auswaehlen();
+//		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
+//
+//	return 0;
+//	}
 }
 
 /**
@@ -76,7 +94,8 @@ int auswaehlen(){
 /**
  * Fuehrt gewaehlte Funktion auf testDeque1 und/oder testDeque2 aus
  */
-void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
+template<class T>
+void ausfuehren(int auswahl, MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
 	switch(auswahl){
 	case PUSH_BACK:
 		push_back_ausfuehren(testDeque1);
@@ -95,7 +114,7 @@ void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
 		break;
 
 	case KONSTRUKTION_MIT_ARRAY:
-		anlegen_mittels_array(testDeque1, testDeque2);
+		//anlegen_mittels_array(testDeque1, testDeque2);
 		break;
 
 	case KOPIERKONST_ZUWEISUNGS_OP:
@@ -129,8 +148,9 @@ void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
 /**
  * Fügt Nutzereingabe an Ende der Deque ein
  */
-void push_back_ausfuehren(MyDeque& testDeque1){
-	string eingabe{};
+template<class T>
+void push_back_ausfuehren(MyDeque<T>& testDeque1){
+	T eingabe{};
 	cout << "Wert eingeben: " << endl;
 	cin >> eingabe;
 
@@ -140,8 +160,9 @@ void push_back_ausfuehren(MyDeque& testDeque1){
 /**
  * Fügt Nutzereingabe an Anfang der Deque ein
  */
-void push_front_ausfuehren(MyDeque& testDeque1){
-	string eingabe{};
+template<class T>
+void push_front_ausfuehren(MyDeque<T>& testDeque1){
+	T eingabe{};
 	cout << "Wert eingeben: " << endl;
 	cin >> eingabe;
 
@@ -151,15 +172,16 @@ void push_front_ausfuehren(MyDeque& testDeque1){
 /**
  * Allokiert dynamisch temporäre Deque, ruft Zuweisungsoperator auf
  */
-void anlegen_mittels_array(MyDeque& testDeque1, MyDeque& testDeque2){
-	vector<string> vector;
+template<class T>
+void anlegen_mittels_array(MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
+	vector<T> vector;
 
-	MyIterator iterator(testDeque1);
+	MyIterator<T> iterator(testDeque1);
 	while(iterator.hasNext()){
 		vector.push_back(iterator.next().getContent());
 	}
 
-	MyDeque* tmpDeque = new MyDeque(vector);
+	MyDeque<T>* tmpDeque = new MyDeque<T>(vector);
 	testDeque2 = *tmpDeque;
 }
 
@@ -167,8 +189,9 @@ void anlegen_mittels_array(MyDeque& testDeque1, MyDeque& testDeque2){
 /**
  * Fuehrt Kopierkonstruktor und dann Zuweisungsoperator aus
  */
-void teste_kopierkonst_zuweisung(MyDeque& testDeque1,MyDeque& testDeque2){
-	MyDeque* tmpDeque = new MyDeque(testDeque1);
+template<class T>
+void teste_kopierkonst_zuweisung(MyDeque<T>& testDeque1,MyDeque<T>& testDeque2){
+	MyDeque<T>* tmpDeque = new MyDeque<T>(testDeque1);
 	cout << "tmpDeque: " << tmpDeque->toString() << endl;
 	testDeque2 = *tmpDeque;
 }
@@ -176,7 +199,8 @@ void teste_kopierkonst_zuweisung(MyDeque& testDeque1,MyDeque& testDeque2){
 /**
  * Fuehrt Vergleich "==" und "!=" aus
  */
-void vergleiche(MyDeque& testDeque1, MyDeque& testDeque2){
+template<class T>
+void vergleiche(MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
 	cout << boolalpha << "Vergleich == : " << (testDeque1==testDeque2) << endl;
 	cout << boolalpha << "Vergleich != : " << (testDeque1!=testDeque2) << endl;
 }
@@ -184,8 +208,9 @@ void vergleiche(MyDeque& testDeque1, MyDeque& testDeque2){
 /**
  * Demonstiert "+" und "+="
  */
-void anhaengen(MyDeque& testDeque1, MyDeque& testDeque2){
-	MyDeque tmpDeque = testDeque1 + testDeque2;
+template<class T>
+void anhaengen(MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
+	MyDeque<T> tmpDeque = testDeque1 + testDeque2;
 	cout << "testDeque1 + testDeque2: " << (tmpDeque).toString() << endl;
 
 	testDeque2 += testDeque1;
@@ -193,36 +218,15 @@ void anhaengen(MyDeque& testDeque1, MyDeque& testDeque2){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//	vector<string>* stringVector = new vector<string>();
-//	stringVector->push_back("Eins ");
-//	stringVector->push_back("Zwei ");
-//	stringVector->push_back("Drei ");
-//	stringVector->push_back("Vier ");
-//	stringVector->push_back("Fuenf ");
+//template<class T>
+//void start(T t){
+//	MyDeque<T>* testDeque1 = new MyDeque<T>();
+//	MyDeque<T>* testDeque2 = new MyDeque<T>();
 //
+//	int funktionsAuswahl { -1 };
+//	while(funktionsAuswahl != PROGRAMM_ENDE ){
 //
-//
-//
-//	MyDeque* testDeque = new MyDeque(*stringVector);
-//
-//	cout << testDeque->toString() << " <- Das ist der Inhalt" << endl;
-
-
-
+//		funktionsAuswahl = auswaehlen();
+//		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
+//	}
+//}

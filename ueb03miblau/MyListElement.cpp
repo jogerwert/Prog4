@@ -12,16 +12,19 @@ using namespace std;
 /**
  * Standard-Konstruktor
  */
-MyListElement::MyListElement(){
+template<class T>
+MyListElement<T>::MyListElement(){
 	this->next = {nullptr};
 	this->pre = {nullptr};
 	this->content = {""};
 }
 
-string MyListElement::toString(){
+template<class T>
+T MyListElement<T>::toString(){
 	return "Inhalt: " + this->content;
 }
 
-string MyListElement::getContent(){
+template<class T>
+T MyListElement<T>::getContent(){
 	return this->content;
 }

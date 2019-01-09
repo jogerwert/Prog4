@@ -12,9 +12,9 @@
 
 using namespace std;
 
-void tue_nichts(MyDeque* test){
-
-}
+//void tue_nichts(MyDeque* test){
+//
+//}
 
 //int main(int argc, char** argv){
 //

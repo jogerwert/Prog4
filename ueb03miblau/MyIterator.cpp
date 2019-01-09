@@ -12,19 +12,22 @@
 #include "MyIterator.h"
 using namespace std;
 
-MyIterator::MyIterator(const MyDeque& deque){
+template<class T>
+MyIterator<T>::MyIterator(const MyDeque<T>& deque){
 	this->maxAnzElemente = deque.anzElemente;
 	this->position = 0;
 	this->current = deque.head;
 }
 
-MyListElement MyIterator::next(){
-	MyListElement* aktuell = this->current;
+template<class T>
+MyListElement<T> MyIterator<T>::next(){
+	MyListElement<T>* aktuell = this->current;
 	current = current->next;
 	position++;
 	return *aktuell;
 }
 
-bool MyIterator::hasNext(){
+template<class T>
+bool MyIterator<T>::hasNext(){
 	return position < maxAnzElemente;
 }

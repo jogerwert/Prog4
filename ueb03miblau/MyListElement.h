@@ -12,20 +12,21 @@
 #include <string>
 using namespace std;
 
+template <typename T>
 class MyListElement {
 	friend class MyDeque;
 	friend class MyIterator;
 
 private:
-	MyListElement* next;
-	MyListElement* pre;
+	MyListElement<T>* next;
+	MyListElement<T>* pre;
 	string content;
 
 public:
 	MyListElement(); //Standard-Konstruktor
 
-	string getContent();
-	string toString();
+	T getContent();
+	T toString();
 };
 
 

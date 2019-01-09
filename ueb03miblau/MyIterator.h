@@ -13,21 +13,20 @@
 #include "MyDeque.h"
 using namespace std;
 
-class MyIterator{
-
+template <typename T>
+class MyIterator {
 
 private:
 	int maxAnzElemente;
 	int position;
-	MyListElement* current; //--muss vom typ her nachher angepasst werden
+	MyListElement<T>* current;
 
 
 public:
-	MyIterator(const MyDeque&); //Standard-Konstruktor
-	MyListElement next();
+	MyIterator(const MyDeque<T>&); //Standard-Konstruktor
+	MyListElement<T> next();
 	bool hasNext();
 };
-
 
 
 #endif /* MYITERATOR_H_ */

@@ -14,29 +14,30 @@
 #include "MyListElement.h"
 using namespace std;
 
+template <typename T>
 class MyDeque{
 	friend class MyIterator;
 
 private:
 	int anzElemente;
-	MyListElement* head; //--muss vom typ her nachher angepasst werden
-	MyListElement* tail; //__|
+	MyListElement<T>* head;
+	MyListElement<T>* tail;
 
 	void adressenAusgeben();
 
 public:
 	MyDeque(); //Standard-Konstruktor
-	MyDeque(const vector<string>&);
+	MyDeque(const vector<T>&);
 	MyDeque(const MyDeque&); //Kopierkonstruktor
 	~MyDeque(); //Destruktor
-	MyDeque& operator=(MyDeque); //Zuweisungsoperator
+	MyDeque<T>& operator=(MyDeque); //Zuweisungsoperator
 	bool operator== (const MyDeque&);
 	bool operator!= (const MyDeque&);
-	MyDeque operator+(const MyDeque&);
-	MyDeque& operator+=(const MyDeque&);
+	MyDeque<T> operator+(const MyDeque&);
+	MyDeque<T>& operator+=(const MyDeque&);
 
-	void push_back(const string&); //spaeter Typ aendern
-	void push_front(const string&);
+	void push_back(const T&);
+	void push_front(const T&);
 
 	void pop_back();
 	void pop_front();
