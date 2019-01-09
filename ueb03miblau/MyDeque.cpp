@@ -120,9 +120,7 @@ string MyDeque::operator[](int i) const{
 	string ergebnis;
 
 	while(j < i){
-		cout << "test1" << endl;
 		iterator.next();
-		cout << "test2" << endl;
 		j++;
 	}
 	ergebnis = iterator.next().content;
@@ -139,14 +137,10 @@ string MyDeque::operator[](int i) const{
 //		string* ergebnis;
 //
 //		while(j < i){
-//			cout << "test3" << endl;
 //			iterator.next();
-//			cout << "test4" << endl;
 //			j++;
 //		}
-//		cout << "test5" << endl;
 //		ergebnis = iterator.next().contentPointer;
-//		cout << "test6" << endl;
 //
 //		return *ergebnis;
 //}

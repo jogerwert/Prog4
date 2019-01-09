@@ -32,6 +32,7 @@ void anlegen_mittels_array(MyDeque&, MyDeque&);
 void teste_kopierkonst_zuweisung(MyDeque&, MyDeque&);
 void vergleiche(MyDeque&, MyDeque&);
 void anhaengen(MyDeque&, MyDeque&);
+void elementzugriff(MyDeque&);
 
 /**
  * Haupt-Schleife
@@ -111,7 +112,7 @@ void ausfuehren(int auswahl, MyDeque& testDeque1, MyDeque& testDeque2){
 		break;
 
 	case ELEMENTZUGRIFF:
-		//elementzugriff(testDeque1);
+		elementzugriff(testDeque1);
 		break;
 
 	case PROGRAMM_ENDE:
@@ -193,7 +194,14 @@ void anhaengen(MyDeque& testDeque1, MyDeque& testDeque2){
 
 }
 
-
+void elementzugriff(MyDeque& testDeque1){
+	testDeque1.push_back("Hello ");
+	testDeque1.push_back("World");
+	testDeque1.push_back("!!!");
+	cout << "Inhalt Stelle 0: " << testDeque1[0] << endl;
+	cout << "Inhalt Stelle 1: " << testDeque1[1] << endl;
+	cout << "Inhalt Stelle 2: " << testDeque1[2] << endl;
+}
 
 
 
