@@ -137,23 +137,6 @@ string MyDeque::operator[](int i) const{
 	return ergebnis;
 }
 
-//string& MyDeque::operator[](int i){
-//
-//	assert(i >= 0 && i < anzElemente);
-//
-//		MyIterator iterator( *(this) );
-//		int j {0};
-//		string* ergebnis;
-//
-//		while(j < i){
-//			iterator.next();
-//			j++;
-//		}
-//		ergebnis = iterator.next().contentPointer;
-//
-//		return *ergebnis;
-//}
-
 void MyDeque::push_back(const string& neuerInhalt){
 	MyListElement* neuesElement = new MyListElement();
 	neuesElement->content = neuerInhalt;
