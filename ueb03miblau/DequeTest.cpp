@@ -25,9 +25,12 @@ constexpr auto ELEMENTZUGRIFF = 9;
 
 constexpr auto TESTE_INT = 1;
 constexpr auto TESTE_STRING = 2;
+constexpr auto TEMPLATE_ENDE = 0;
 
 /**Funktions-Prototypen**/
 int auswaehlen();
+void startInt();
+void startString();
 
 template<class T>
 void ausfuehren(int, MyDeque<T>&, MyDeque<T>&);
@@ -50,11 +53,57 @@ void vergleiche(MyDeque<T>&, MyDeque<T>&);
 template<class T>
 void anhaengen(MyDeque<T>&, MyDeque<T>&);
 
+template<class T>
+void elementzugriff(MyDeque<T>&);
+
 /**
  * Haupt-Schleife
  */
 int main(int argc, char** argv){
 
+
+	int templateAuswahl { -1 };
+	while(templateAuswahl != TEMPLATE_ENDE ){
+		cout << "Auswahl der Art des Templates:" << endl;
+		cout << TESTE_INT << " integer" << endl;
+		cout << TESTE_STRING << " string" << endl;
+		cout << TEMPLATE_ENDE << " Programm beenden" << endl;
+
+		cin >> templateAuswahl;
+		switch(templateAuswahl){
+		case TESTE_INT:
+			startInt();
+			break;
+
+		case TESTE_STRING:
+			startString();
+			break;
+
+		case TEMPLATE_ENDE:
+				cout << "Programm wurde beendet" << endl;
+				break;
+
+		default: cout << "Keine gueltige Eingabe" << endl;
+		}
+	}
+	return 0;
+
+}
+
+
+void startInt(){
+	MyDeque<int>* testDeque1 = new MyDeque<int>();
+	MyDeque<int>* testDeque2 = new MyDeque<int>();
+
+	int funktionsAuswahl { -1 };
+	while(funktionsAuswahl != PROGRAMM_ENDE ){
+
+		funktionsAuswahl = auswaehlen();
+		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
+	}
+}
+
+void startString(){
 	MyDeque<string>* testDeque1 = new MyDeque<string>();
 	MyDeque<string>* testDeque2 = new MyDeque<string>();
 
@@ -63,10 +112,9 @@ int main(int argc, char** argv){
 
 		funktionsAuswahl = auswaehlen();
 		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
-
-	return 0;
 	}
 }
+
 
 /**
  * Zeigt eine Auswahl an Funktionen an
@@ -85,7 +133,7 @@ int auswaehlen(){
 	cout <<  VERGLEICHE <<" Operator== und Operator!=" << endl;
 	cout <<  ANHAENGEN << " Operator+ und Operator+=" <<endl;
 	cout <<  ELEMENTZUGRIFF << " Operator[] " << endl;
-	cout <<  PROGRAMM_ENDE <<" Programm beenden" << endl;
+	cout <<  PROGRAMM_ENDE <<" Testlauf beenden" << endl;
 
 	cin >> auswahl;
 	return auswahl;
@@ -114,7 +162,7 @@ void ausfuehren(int auswahl, MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
 		break;
 
 	case KONSTRUKTION_MIT_ARRAY:
-		//anlegen_mittels_array(testDeque1, testDeque2);
+		anlegen_mittels_array(testDeque1, testDeque2);
 		break;
 
 	case KOPIERKONST_ZUWEISUNGS_OP:
@@ -130,11 +178,11 @@ void ausfuehren(int auswahl, MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
 		break;
 
 	case ELEMENTZUGRIFF:
-		//elementzugriff(testDeque1);
+		elementzugriff(testDeque1);
 		break;
 
 	case PROGRAMM_ENDE:
-		cout << "Programm wurde beendet" << endl;
+		cout << "Testlauf wurde beendet" << endl;
 		break;
 
 	default: cout << "Keine gueltige Eingabe" << endl;
@@ -218,15 +266,11 @@ void anhaengen(MyDeque<T>& testDeque1, MyDeque<T>& testDeque2){
 
 }
 
-//template<class T>
-//void start(T t){
-//	MyDeque<T>* testDeque1 = new MyDeque<T>();
-//	MyDeque<T>* testDeque2 = new MyDeque<T>();
-//
-//	int funktionsAuswahl { -1 };
-//	while(funktionsAuswahl != PROGRAMM_ENDE ){
-//
-//		funktionsAuswahl = auswaehlen();
-//		ausfuehren(funktionsAuswahl, *testDeque1, *testDeque2);
-//	}
-//}
+template<class T>
+void elementzugriff(MyDeque<T>& testDeque1){
+	cout << "Bitte auszulesende Stelle eingeben: ";
+	int i;
+	cin >> i;
+	cout << "Inhalt an Stelle " << i << ": " << testDeque1[i] << endl;
+
+}

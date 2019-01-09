@@ -25,7 +25,7 @@ class MyListElement {
 private:
 	MyListElement<T>* next;
 	MyListElement<T>* pre;
-	string content;
+	T content;
 
 public:
 	MyListElement(); //Standard-Konstruktor
@@ -41,7 +41,6 @@ template<class T>
 MyListElement<T>::MyListElement(){
 	this->next = {nullptr};
 	this->pre = {nullptr};
-	this->content = {""};
 }
 
 template<class T>

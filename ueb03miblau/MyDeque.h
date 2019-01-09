@@ -12,8 +12,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cassert>
 #include "MyListElement.h"
 #include "MyIterator.h"
+#include <sstream>
 using namespace std;
 
 
@@ -39,6 +41,7 @@ public:
 	bool operator!= (const MyDeque&);
 	MyDeque<T> operator+(const MyDeque&);
 	MyDeque<T>& operator+=(const MyDeque&);
+	T operator[](int i) const;
 
 	void push_back(const T&);
 	void push_front(const T&);
@@ -156,6 +159,25 @@ MyDeque<T>& MyDeque<T>::operator+=(const MyDeque<T>& md){
 }
 
 template<class T>
+T MyDeque<T>::operator[](int i) const{
+
+	T ergebnis;
+
+	assert(i >= 0 && i < anzElemente);
+
+	MyIterator<T> iterator( *(this) );
+		int j {0};
+
+		while(j < i){
+			iterator.next();
+			j++;
+		}
+		ergebnis = iterator.next().content;
+
+		return ergebnis;
+}
+
+template<class T>
 void MyDeque<T>::push_back(const T& neuerInhalt){
 	MyListElement<T>* neuesElement = new MyListElement<T>();
 	neuesElement->content = neuerInhalt;
@@ -262,13 +284,13 @@ inline bool MyDeque<T>::hatZweiElemente(){
 
 template<class T>
 string MyDeque<T>::toString(){
-	string ergebnis = "";
+	std::ostringstream stream{};
 	MyListElement<T>* cur = head; //Impliziter Aufruf des Kopierkonstr.
 	for(int i = 0; i < anzElemente; i++){
-		ergebnis.append(cur->content);
-		ergebnis.append(" ");
+		stream << cur->content << " ";
 		cur = cur->next;
 	}
+	string ergebnis(stream.str());
 	return ergebnis;
 }
 
