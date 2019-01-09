@@ -195,12 +195,11 @@ void anhaengen(MyDeque& testDeque1, MyDeque& testDeque2){
 }
 
 void elementzugriff(MyDeque& testDeque1){
-	testDeque1.push_back("Hello ");
-	testDeque1.push_back("World");
-	testDeque1.push_back("!!!");
-	cout << "Inhalt Stelle 0: " << testDeque1[0] << endl;
-	cout << "Inhalt Stelle 1: " << testDeque1[1] << endl;
-	cout << "Inhalt Stelle 2: " << testDeque1[2] << endl;
+	cout << "Bitte auszulesende Stelle eingeben: ";
+	int i;
+	cin >> i;
+	cout << "Inhalt an Stelle " << i << ": " << testDeque1[i] << endl;
+
 }
 
 

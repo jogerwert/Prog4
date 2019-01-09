@@ -113,11 +113,20 @@ MyDeque& MyDeque::operator+=(const MyDeque& md){
 
 string MyDeque::operator[](int i) const{
 
-	assert(i >= 0 && i < anzElemente);
+	string ergebnis;
+
+	if(i < 0){
+		ergebnis = "ERROR: Index darf nicht unter 0 gewaehlt werden!";
+		return ergebnis;
+	}
+
+	if(i >= anzElemente){
+		ergebnis = "ERROR: Index darf die Anzahl der Elemente nicht ueberschreiten!";
+		return ergebnis;
+	}
 
 	MyIterator iterator( *(this) );
 	int j {0};
-	string ergebnis;
 
 	while(j < i){
 		iterator.next();
